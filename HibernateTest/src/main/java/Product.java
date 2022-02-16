@@ -1,6 +1,6 @@
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "Product")
 @Table(name = "product")
 public class Product {
 
@@ -19,6 +19,22 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category_id;
 
+    public Product(long id, String title, int price, Category category_id){
+        this.id = id;
+        this.title = title;
+        this.price = price;
+        this.category_id = category_id;
+    }
+    public Product(String title, int price, Category category_id){
+        this.title = title;
+        this.price = price;
+        this.category_id = category_id;
+    }
+
+
+    public Product() {
+
+    }
 
     public long getId() {
         return id;
@@ -50,5 +66,15 @@ public class Product {
 
     public void setCategoryId(Category category_id) {
         this.category_id = category_id;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", price=" + price +
+                ", category_id=" + category_id +
+                '}';
     }
 }
