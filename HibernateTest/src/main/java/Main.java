@@ -1,14 +1,20 @@
 
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+
 
 
 public class Main {
     public static void main(String[] args) {
-        SessionFactory sessionFactory = new Configuration()
-                .configure("hibernate.cfg.xml")
-                .addAnnotatedClass(Product.class)
-                .addAnnotatedClass(Category.class)
-                .buildSessionFactory();
+       ProductDao productDao = new ProductDao();
+       Category category = new Category();
+       category.setId(1);
+
+        productDao.addNewProduct(new Product("Opel",15250,category));
+
+        System.out.println(productDao.getProductById(5));
+//        productDao.deleteById(2);
+        System.out.println(productDao.getAllProducts());
+
+
+
     }
 }
