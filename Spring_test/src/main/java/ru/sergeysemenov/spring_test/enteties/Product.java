@@ -14,15 +14,18 @@ import java.util.List;
 @Setter
 public class Product {
     @Id
-    @Column(name = "id")
+    @Column(name = "product_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "product_title")
     private String name;
 
-    @Column(name = "price")
+    @Column(name = "product_price")
     private double price;
+
+    @Column(name = "product_description")
+    private String description;
 
     @ManyToMany
     @JoinTable(
@@ -32,6 +35,5 @@ public class Product {
     )
     @Cascade({org.hibernate.annotations.CascadeType.DELETE, org.hibernate.annotations.CascadeType.DETACH})
     private List<Category> categories;
-
 
 }
