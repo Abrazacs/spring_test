@@ -5,25 +5,23 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.sergeysemenov.spring_test.servicies.AuthoritiesService;
+import ru.sergeysemenov.spring_test.servicies.RolesService;
 
-import javax.sql.DataSource;
 import java.util.List;
 
 @Controller
 public class AdminController {
-
-    private AuthoritiesService authoritiesService;
+    private RolesService rolesService;
 
     @Autowired
-    public void setAuthoritiesService(AuthoritiesService authoritiesService) {
-        this.authoritiesService = authoritiesService;
+    public void setRolesService(RolesService rolesService) {
+        this.rolesService = rolesService;
     }
 
     @Secured({"ROLE_ADMIN"})
     @RequestMapping("/admin")
     public String adminPanel(Model model){
-        List<String> roles = authoritiesService.getAllRoles();
+        List<String> roles = rolesService.mapRolesToTitles(rolesService.getAllRoles());
         model.addAttribute("roles", roles);
         return "admin";
     }
